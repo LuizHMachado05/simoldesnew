@@ -78,6 +78,258 @@ interface MoldProgram {
   operations: Operation[];
 }
 
+const historicPrograms: MoldProgram[] = [
+  {
+    id: '1665_15',
+    name: 'MOLDE LATERAL DIREITO',
+    machine: 'F1400',
+    programPath: 'U:/F1400/1665_15',
+    material: '1730',
+    date: '05/02/2024',
+    programmer: 'diego.verciano',
+    blockCenter: 'X0,0 Y0,0',
+    reference: 'EM Z: 15,0',
+    observations: 'VERIFICAR ALINHAMENTO INICIAL',
+    imageUrl: IMAGES.programCapa,
+    operations: [
+      {
+        id: 1,
+        sequence: '04',
+        type: 'Furação',
+        function: 'Pré-furo',
+        centerPoint: '42',
+        toolRef: 'BK_DRILL_D38_SSD_701800022',
+        ic: '235',
+        alt: '260',
+        time: {
+          machine: '09:15:00',
+          total: '09:45:30'
+        },
+        details: {
+          depth: '85mm',
+          speed: '2800 RPM',
+          feed: '0.12mm/rev',
+          coolant: 'Externa 45 bar'
+        },
+        quality: {
+          tolerance: '±0.02mm',
+          surfaceFinish: 'Ra 0.8',
+          requirements: ['Verificar circularidade']
+        },
+        imageUrl: IMAGES.operation,
+        completed: true,
+        signedBy: 'carlos.silva',
+        timestamp: '05/02/2024 09:45:30',
+        timeRecord: {
+          start: '09:15:00',
+          end: '09:45:30'
+        },
+        measurementValue: '37.98'
+      },
+      {
+        id: 2,
+        sequence: '05',
+        type: 'Fresamento',
+        function: 'Acabamento lateral',
+        centerPoint: '38',
+        toolRef: 'BK_FINISH_D32_SSD_701800045',
+        ic: '190',
+        alt: '215',
+        time: {
+          machine: '10:00:00',
+          total: '10:45:00'
+        },
+        details: {
+          depth: '55mm',
+          speed: '3500 RPM',
+          feed: '0.08mm/rev',
+          coolant: 'Externa 50 bar'
+        },
+        quality: {
+          tolerance: '±0.01mm',
+          surfaceFinish: 'Ra 0.4',
+          requirements: ['Medir planicidade', 'Verificar acabamento']
+        },
+        imageUrl: IMAGES.operation,
+        completed: true,
+        signedBy: 'carlos.silva',
+        timestamp: '05/02/2024 10:45:00',
+        timeRecord: {
+          start: '10:00:00',
+          end: '10:45:00'
+        },
+        measurementValue: '54.99'
+      }
+    ]
+  },
+  {
+    id: '1666_16',
+    name: 'MOLDE BASE SUPERIOR',
+    machine: 'F1600',
+    programPath: 'U:/F1600/1666_16',
+    material: '1740',
+    date: '06/02/2024',
+    programmer: 'ana.santos',
+    blockCenter: 'X0,0 Y0,0',
+    reference: 'EM Z: 25,0',
+    observations: 'USAR SUPORTE ESPECIAL',
+    imageUrl: IMAGES.programCapa,
+    operations: [
+      {
+        id: 1,
+        sequence: '06',
+        type: 'Fresamento',
+        function: 'Desbaste',
+        centerPoint: '52',
+        toolRef: 'BK_ROUGH_D63_SSD_701800078',
+        ic: '280',
+        alt: '305',
+        time: {
+          machine: '13:30:00',
+          total: '14:15:00'
+        },
+        details: {
+          depth: '95mm',
+          speed: '2200 RPM',
+          feed: '0.18mm/rev',
+          coolant: 'Externa 55 bar'
+        },
+        quality: {
+          tolerance: '±0.05mm',
+          surfaceFinish: 'Ra 1.6',
+          requirements: ['Verificar profundidade']
+        },
+        imageUrl: IMAGES.operation,
+        completed: true,
+        signedBy: 'roberto.oliveira',
+        timestamp: '06/02/2024 14:15:00',
+        timeRecord: {
+          start: '13:30:00',
+          end: '14:15:00'
+        },
+        measurementValue: '94.97'
+      },
+      {
+        id: 2,
+        sequence: '07',
+        type: 'Fresamento',
+        function: 'Acabamento',
+        centerPoint: '45',
+        toolRef: 'BK_FINISH_D40_SSD_701800089',
+        ic: '225',
+        alt: '250',
+        time: {
+          machine: '14:30:00',
+          total: '15:30:00'
+        },
+        details: {
+          depth: '95mm',
+          speed: '3000 RPM',
+          feed: '0.1mm/rev',
+          coolant: 'Externa 60 bar'
+        },
+        quality: {
+          tolerance: '±0.01mm',
+          surfaceFinish: 'Ra 0.4',
+          requirements: ['Medir rugosidade', 'Verificar dimensional']
+        },
+        imageUrl: IMAGES.operation,
+        completed: true,
+        signedBy: 'roberto.oliveira',
+        timestamp: '06/02/2024 15:30:00',
+        timeRecord: {
+          start: '14:30:00',
+          end: '15:30:00'
+        },
+        measurementValue: '95.00'
+      }
+    ]
+  },
+  {
+    id: '1667_17',
+    name: 'MOLDE CAVIDADE CENTRAL',
+    machine: 'F1400',
+    programPath: 'U:/F1400/1667_17',
+    material: '1730',
+    date: '07/02/2024',
+    programmer: 'pedro.oliveira',
+    blockCenter: 'X0,0 Y0,0',
+    reference: 'EM Z: 30,0',
+    observations: 'REFRIGERAÇÃO ESPECIAL',
+    imageUrl: IMAGES.programCapa,
+    operations: [
+      {
+        id: 1,
+        sequence: '08',
+        type: 'Furação',
+        function: 'Furos de refrigeração',
+        centerPoint: '58',
+        toolRef: 'BK_DRILL_D12_SSD_701800099',
+        ic: '150',
+        alt: '175',
+        time: {
+          machine: '08:00:00',
+          total: '09:00:00'
+        },
+        details: {
+          depth: '150mm',
+          speed: '4000 RPM',
+          feed: '0.08mm/rev',
+          coolant: 'Interna 70 bar'
+        },
+        quality: {
+          tolerance: '±0.02mm',
+          surfaceFinish: 'Ra 0.8',
+          requirements: ['Verificar profundidade', 'Medir circularidade']
+        },
+        imageUrl: IMAGES.operation,
+        completed: true,
+        signedBy: 'maria.santos',
+        timestamp: '07/02/2024 09:00:00',
+        timeRecord: {
+          start: '08:00:00',
+          end: '09:00:00'
+        },
+        measurementValue: '12.01'
+      },
+      {
+        id: 2,
+        sequence: '09',
+        type: 'Fresamento',
+        function: 'Acabamento cavidade',
+        centerPoint: '50',
+        toolRef: 'BK_FINISH_D16_SSD_701800100',
+        ic: '165',
+        alt: '190',
+        time: {
+          machine: '09:30:00',
+          total: '11:00:00'
+        },
+        details: {
+          depth: '80mm',
+          speed: '4500 RPM',
+          feed: '0.05mm/rev',
+          coolant: 'Externa 65 bar'
+        },
+        quality: {
+          tolerance: '±0.008mm',
+          surfaceFinish: 'Ra 0.2',
+          requirements: ['Medir rugosidade', 'Verificar geometria']
+        },
+        imageUrl: IMAGES.operation,
+        completed: true,
+        signedBy: 'maria.santos',
+        timestamp: '07/02/2024 11:00:00',
+        timeRecord: {
+          start: '09:30:00',
+          end: '11:00:00'
+        },
+        measurementValue: '79.992'
+      }
+    ]
+  }
+];
+
 function App() {
   const [operatorId, setOperatorId] = useState('');
   const [password, setPassword] = useState('');
@@ -1073,125 +1325,292 @@ function App() {
               </div>
             )}
 
-            {activeTab === 'history' && !selectedProgram && (
+            {activeTab === 'history' && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Histórico de Projetos
-                </h2>
-                <div className="grid grid-cols-1 gap-6">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <div
-                      key={i}
-                      onClick={() => setSelectedProgram({
-                        id: `${1660 + i}`,
-                        name: `Projeto #${1660 + i}`,
-                        machine: 'F1400',
-                        programPath: `U:/F1400/${1660 + i}`,
-                        material: '1730',
-                        date: new Date(2024, 2, 20 - i).toLocaleDateString('pt-BR'),
-                        programmer: `Operador ${i}`,
-                        blockCenter: 'X0,0 Y0,0',
-                        reference: 'EM Z: 20,0',
-                        observations: 'Projeto Concluído',
-                        imageUrl: IMAGES.programCapa,
-                        operations: [
-                          {
-                            id: 1,
-                            sequence: '01',
-                            type: 'Furação',
-                            function: 'Centro',
-                            centerPoint: '48',
-                            toolRef: 'BK_TOPDRIL_D44_SSD_701800011',
-                            ic: '247',
-                            alt: '273',
-                            time: {
-                              machine: '10:30:12',
-                              total: '10:38:15',
-                            },
-                            details: {
-                              depth: '120mm',
-                              speed: '2400 RPM',
-                              feed: '0.15mm/rev',
-                              coolant: 'Externa 40 bar',
-                            },
-                            quality: {
-                              tolerance: '±0.02mm',
-                              surfaceFinish: 'Ra 0.8',
-                              requirements: ['Verificar alinhamento', 'Medir profundidade'],
-                            },
-                            imageUrl: IMAGES.operation,
-                            completed: true,
-                            signedBy: `Operador ${i}`,
-                            timestamp: new Date(2024, 2, 20 - i, 9).toLocaleString(),
-                            inspectionNotes: 'Operação concluída conforme especificações',
-                          },
-                          // Add more completed operations as needed
-                        ],
-                      })}
-                      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                    >
-                      <div className="p-6">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-medium text-gray-900">
-                              Projeto #{1660 + i}
-                            </h3>
-                            <p className="text-sm text-gray-500">Máquina: F1400</p>
-                          </div>
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            Concluído
-                          </span>
-                        </div>
-                        <div className="mt-4 grid grid-cols-3 gap-4">
-                          <div>
-                            <dt className="text-sm font-medium text-gray-500">
-                              Data Conclusão
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900">
-                              {new Date(2024, 2, 20 - i).toLocaleDateString('pt-BR')}
-                            </dd>
-                          </div>
-                          <div>
-                            <dt className="text-sm font-medium text-gray-500">
-                              Operador
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900">
-                              Operador {i}
-                            </dd>
-                          </div>
-                          <div>
-                            <dt className="text-sm font-medium text-gray-500">
-                              Tempo Total
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900">
-                              {4 + i}h 30min
-                            </dd>
-                          </div>
-                        </div>
-                        <div className="mt-4">
-                          <h4 className="text-sm font-medium text-gray-500 mb-2">
-                            Operações Realizadas
-                          </h4>
-                          <div className="space-y-2">
-                            {[1, 2, 3].map((op) => (
-                              <div
-                                key={op}
-                                className="flex items-center justify-between text-sm"
-                              >
-                                <span className="text-gray-900">
-                                  Operação #{op} - {op === 1 ? 'Furação' : op === 2 ? 'Fresamento' : 'Acabamento'}
-                                </span>
-                                <span className="text-gray-500">
-                                  {new Date(2024, 2, 20 - i, 9 + op).toLocaleTimeString('pt-BR')}
+                {!selectedProgram ? (
+                  // Lista de projetos no histórico
+                  <div className="p-6">
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-2xl font-bold text-gray-900">
+                        Histórico de Projetos
+                      </h2>
+                      <div className="flex gap-2">
+                        <select 
+                          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#04514B]"
+                          defaultValue="all"
+                        >
+                          <option value="all">Todos os Status</option>
+                          <option value="completed">Concluídos</option>
+                          <option value="cancelled">Cancelados</option>
+                        </select>
+                        <select 
+                          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#04514B]"
+                          defaultValue="30"
+                        >
+                          <option value="7">Últimos 7 dias</option>
+                          <option value="30">Últimos 30 dias</option>
+                          <option value="90">Últimos 90 dias</option>
+                          <option value="all">Todo período</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {historicPrograms.map((program) => (
+                        <div
+                          key={program.id}
+                          onClick={() => {
+                            setSelectedOperation(null); // Reseta a operação selecionada
+                            setSelectedProgram(program);
+                          }}
+                          className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer border border-transparent hover:border-[#04514B]"
+                        >
+                          <div className="p-6">
+                            <div className="flex justify-between items-start mb-4">
+                              <div>
+                                <h3 className="text-lg font-semibold text-gray-900">
+                                  {program.name}
+                                </h3>
+                                <p className="text-sm text-gray-500 mt-1">
+                                  <Factory className="h-4 w-4 inline mr-1" />
+                                  Máquina: {program.machine}
+                                </p>
+                              </div>
+                              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <CheckCircle2 className="h-3 w-3 mr-1" />
+                                Concluído
+                              </span>
+                            </div>
+
+                            <div className="space-y-3">
+                              <div className="flex items-center text-sm">
+                                <Tool className="h-4 w-4 text-gray-400 mr-2" />
+                                <span className="text-gray-600">Material: {program.material}</span>
+                              </div>
+                              <div className="flex items-center text-sm">
+                                <User className="h-4 w-4 text-gray-400 mr-2" />
+                                <span className="text-gray-600">{program.programmer}</span>
+                              </div>
+                              <div className="flex items-center text-sm">
+                                <History className="h-4 w-4 text-gray-400 mr-2" />
+                                <span className="text-gray-600">
+                                  Data: {program.date}
                                 </span>
                               </div>
-                            ))}
+                            </div>
+
+                            <div className="mt-4 pt-4 border-t border-gray-100">
+                              <div className="flex justify-between items-center">
+                                <div className="flex items-center space-x-2">
+                                  <Eye className="h-4 w-4 text-[#04514B]" />
+                                  <span className="text-sm text-[#04514B]">Ver detalhes</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : !selectedOperation ? (
+                  // Visualização detalhada do programa
+                  <div className="bg-white shadow rounded-lg">
+                    <div className="px-4 py-5 sm:p-6">
+                      <div className="flex justify-between items-center mb-6">
+                        <div className="flex items-center space-x-4">
+                          <button
+                            onClick={() => setSelectedProgram(null)}
+                            className="text-gray-500 hover:text-gray-700"
+                          >
+                            <ArrowLeft className="h-6 w-6" />
+                          </button>
+                          <div>
+                            <h2 className="text-lg font-medium text-gray-900">
+                              {selectedProgram.name}
+                            </h2>
+                            <p className="text-sm text-gray-500">
+                              Programa: {selectedProgram.programPath}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h3 className="text-sm font-medium text-gray-900 mb-2">
+                            Informações do Programa
+                          </h3>
+                          <dl className="grid grid-cols-2 gap-2 text-sm">
+                            <dt className="text-gray-500">Máquina:</dt>
+                            <dd className="text-gray-900">{selectedProgram.machine}</dd>
+                            <dt className="text-gray-500">Material:</dt>
+                            <dd className="text-gray-900">{selectedProgram.material}</dd>
+                            <dt className="text-gray-500">Data:</dt>
+                            <dd className="text-gray-900">{selectedProgram.date}</dd>
+                            <dt className="text-gray-500">Programador:</dt>
+                            <dd className="text-gray-900">{selectedProgram.programmer}</dd>
+                          </dl>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h3 className="text-sm font-medium text-gray-900 mb-2">
+                            Visualização do Programa
+                          </h3>
+                          <div className="aspect-w-16 aspect-h-9">
+                            <img
+                              src={selectedProgram.imageUrl || IMAGES.programCapa}
+                              alt="Visualização do programa"
+                              className="w-full h-full object-contain rounded-lg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-medium text-gray-900 mb-4">
+                          Operações
+                        </h3>
+                        <div className="overflow-x-auto">
+                          <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                              <tr>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Seq.</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Função</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ferramenta</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Parâmetros</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Qualidade</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operador</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horário</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Medição</th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                              </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                              {selectedProgram.operations.map((operation) => (
+                                <tr key={operation.id} className="hover:bg-gray-50">
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{operation.sequence}</td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{operation.type}</td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{operation.function}</td>
+                                  <td className="px-3 py-2 text-sm text-gray-500">
+                                    <div className="max-w-xs truncate">{operation.toolRef}</div>
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">
+                                    <div className="space-y-1">
+                                      <div>Vel: {operation.details.speed}</div>
+                                      <div>Av: {operation.details.feed}</div>
+                                      <div>Prof: {operation.details.depth}</div>
+                                    </div>
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">
+                                    <div>Tol: {operation.quality.tolerance}</div>
+                                    <div>Acab: {operation.quality.surfaceFinish}</div>
+                                  </td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{operation.signedBy}</td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">
+                                    <div>Início: {operation.timeRecord?.start}</div>
+                                    <div>Fim: {operation.timeRecord?.end}</div>
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">{operation.measurementValue}mm</td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    <OperationActions
+                                      operationId={operation.id}
+                                      completed={operation.completed}
+                                      onView={() => setSelectedOperation(operation)}
+                                      onSign={() => {}}
+                                      isHistory={true}
+                                    />
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  // Visualização detalhada da operação
+                  <div className="bg-white shadow rounded-lg">
+                    <div className="px-4 py-5 sm:p-6">
+                      <div className="flex items-center space-x-4 mb-6">
+                        <button
+                          onClick={() => setSelectedOperation(null)}
+                          className="text-gray-500 hover:text-gray-700"
+                        >
+                          <ArrowLeft className="h-6 w-6" />
+                        </button>
+                        <div>
+                          <h2 className="text-lg font-medium text-gray-900">
+                            Operação {selectedOperation.sequence} - {selectedOperation.type}
+                          </h2>
+                          <p className="text-sm text-gray-500">
+                            {selectedOperation.function}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                            <h3 className="text-sm font-medium text-gray-900 mb-2">
+                              Detalhes da Operação
+                            </h3>
+                            <dl className="grid grid-cols-2 gap-2 text-sm">
+                              <dt className="text-gray-500">Ferramenta:</dt>
+                              <dd className="text-gray-900">{selectedOperation.toolRef}</dd>
+                              <dt className="text-gray-500">Velocidade:</dt>
+                              <dd className="text-gray-900">{selectedOperation.details.speed}</dd>
+                              <dt className="text-gray-500">Avanço:</dt>
+                              <dd className="text-gray-900">{selectedOperation.details.feed}</dd>
+                              <dt className="text-gray-500">Profundidade:</dt>
+                              <dd className="text-gray-900">{selectedOperation.details.depth}</dd>
+                              <dt className="text-gray-500">Tolerância:</dt>
+                              <dd className="text-gray-900">{selectedOperation.quality.tolerance}</dd>
+                              <dt className="text-gray-500">Acabamento:</dt>
+                              <dd className="text-gray-900">{selectedOperation.quality.surfaceFinish}</dd>
+                              <dt className="text-gray-500">Operador:</dt>
+                              <dd className="text-gray-900">{selectedOperation.signedBy}</dd>
+                              <dt className="text-gray-500">Medição:</dt>
+                              <dd className="text-gray-900">{selectedOperation.measurementValue}mm</dd>
+                            </dl>
+                          </div>
+
+                          {selectedOperation.details.notes && (
+                            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
+                              <div className="flex">
+                                <div className="flex-shrink-0">
+                                  <Info className="h-5 w-5 text-yellow-400" />
+                                </div>
+                                <div className="ml-3">
+                                  <h3 className="text-sm font-medium text-yellow-800">
+                                    Observações
+                                  </h3>
+                                  <p className="text-sm text-yellow-700 mt-1">
+                                    {selectedOperation.details.notes}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h3 className="text-sm font-medium text-gray-900 mb-2">
+                            Visualização da Operação
+                          </h3>
+                          <div className="aspect-w-16 aspect-h-9">
+                            <img
+                              src={selectedProgram.imageUrl || IMAGES.programCapa}
+                              alt="Visualização da operação"
+                              className="w-full h-full object-contain rounded-lg"
+                            />
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             )}
           </main>

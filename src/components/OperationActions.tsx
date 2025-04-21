@@ -6,9 +6,16 @@ interface OperationActionsProps {
   completed: boolean;
   onView: (e: React.MouseEvent) => void;
   onSign: (e: React.MouseEvent) => void;
+  isHistory?: boolean;
 }
 
-export function OperationActions({ operationId, completed, onView, onSign }: OperationActionsProps) {
+export function OperationActions({ 
+  operationId, 
+  completed, 
+  onView, 
+  onSign,
+  isHistory = false 
+}: OperationActionsProps) {
   return (
     <div className="flex flex-col gap-2">
       <button
@@ -22,7 +29,7 @@ export function OperationActions({ operationId, completed, onView, onSign }: Ope
         Visualizar
       </button>
       
-      {!completed && (
+      {!completed && !isHistory && (
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -37,4 +44,6 @@ export function OperationActions({ operationId, completed, onView, onSign }: Ope
     </div>
   );
 }
+
+
 
