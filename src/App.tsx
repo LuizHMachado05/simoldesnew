@@ -633,525 +633,443 @@ function App() {
               </div>
             )}
 
-            {activeTab === 'projects' && !selectedProgram && (
+            {activeTab === 'projects' && (
               <div>
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">Projetos</h2>
-                  <button
-                    onClick={() => {
-                      // Por enquanto apenas visual, sem funcionalidade
-                      const button = document.querySelector('#refresh-button');
-                      if (button) {
-                        button.classList.add('animate-spin');
-                        setTimeout(() => {
-                          button.classList.remove('animate-spin');
-                        }, 1000);
-                      }
-                    }}
-                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#04514B] hover:bg-[#023834] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#04514B] transition-colors"
-                  >
-                    <RefreshCw id="refresh-button" className="h-4 w-4 mr-2" />
-                    Atualizar
-                  </button>
-                </div>
-                <div className="bg-white rounded-xl shadow-md">
-                  <div className="grid grid-cols-1 gap-4 p-6">
-                    {moldPrograms.map((program) => (
-                      <div
-                        key={program.id}
-                        onClick={() => setSelectedProgram(program)}
-                        className="border rounded-lg p-4 hover:border-[#04514B] transition-colors cursor-pointer"
-                      >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-semibold text-gray-900">
-                              {program.name} - #{program.id}
-                            </h3>
-                            <p className="text-sm text-gray-500 mt-1">
-                              Máquina: {program.machine}
-                            </p>
-                          </div>
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            Em Andamento
-                          </span>
-                        </div>
-                        <div className="mt-4">
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div
-                              className="bg-[#04514B] h-2 rounded-full"
-                              style={{
-                                width: `${
-                                  (program.operations.filter((op) => op.completed)
-                                    .length /
-                                    program.operations.length) *
-                                  100
-                                }%`,
-                              }}
-                            ></div>
-                          </div>
-                          <p className="text-sm text-gray-500 mt-2">
-                            {
-                              program.operations.filter((op) => op.completed).length
-                            }{' '}
-                            de {program.operations.length} operações concluídas
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'projects' && selectedProgram && (
-              <div>
-                <div className="flex justify-between items-center mb-6">
-                  <div className="flex items-center space-x-4">
-                    <button
-                      onClick={() => setSelectedProgram(null)}
-                      className="text-gray-500 hover:text-gray-700"
-                    >
-                      <ArrowLeft className="h-6 w-6" />
-                    </button>
-                    <div>
-                      <h2 className="text-2xl font-bold text-gray-900">
-                        {selectedProgram.name}
-                      </h2>
-                      <p className="text-sm text-gray-500">#{selectedProgram.id}</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      // Por enquanto apenas visual, sem funcionalidade
-                      const button = document.querySelector('#refresh-program-button');
-                      if (button) {
-                        button.classList.add('animate-spin');
-                        setTimeout(() => {
-                          button.classList.remove('animate-spin');
-                        }, 1000);
-                      }
-                    }}
-                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#04514B] hover:bg-[#023834] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#04514B] transition-colors"
-                  >
-                    <RefreshCw id="refresh-program-button" className="h-4 w-4 mr-2" />
-                    Atualizar
-                  </button>
-                </div>
-                <div className="bg-white rounded-xl shadow-md">
-                  <div className="grid grid-cols-1 gap-4 p-6">
-                    {moldPrograms.map((program) => (
-                      <div
-                        key={program.id}
-                        onClick={() => setSelectedProgram(program)}
-                        className="border rounded-lg p-4 hover:border-[#04514B] transition-colors cursor-pointer"
-                      >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-semibold text-gray-900">
-                              {program.name} - #{program.id}
-                            </h3>
-                            <p className="text-sm text-gray-500 mt-1">
-                              Máquina: {program.machine}
-                            </p>
-                          </div>
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            Em Andamento
-                          </span>
-                        </div>
-                        <div className="mt-4">
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div
-                              className="bg-[#04514B] h-2 rounded-full"
-                              style={{
-                                width: `${
-                                  (program.operations.filter((op) => op.completed)
-                                    .length /
-                                    program.operations.length) *
-                                  100
-                                }%`,
-                              }}
-                            ></div>
-                          </div>
-                          <p className="text-sm text-gray-500 mt-2">
-                            {
-                              program.operations.filter((op) => op.completed).length
-                            }{' '}
-                            de {program.operations.length} operações concluídas
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {selectedProgram && !selectedOperation && (
-              <div className="bg-white shadow rounded-lg">
-                <div className="px-4 py-5 sm:p-6">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center space-x-4">
+                {!selectedProgram ? (
+                  // Lista de Projetos
+                  <div>
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-2xl font-bold text-gray-900">Projetos</h2>
                       <button
-                        onClick={() => setSelectedProgram(null)}
-                        className="text-gray-500 hover:text-gray-700"
+                        onClick={() => {
+                          const button = document.querySelector('#refresh-button');
+                          if (button) {
+                            button.classList.add('animate-spin');
+                            setTimeout(() => {
+                              button.classList.remove('animate-spin');
+                            }, 1000);
+                          }
+                        }}
+                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#04514B] hover:bg-[#023834] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#04514B] transition-colors"
                       >
-                        <ArrowLeft className="h-6 w-6" />
+                        <RefreshCw id="refresh-button" className="h-4 w-4 mr-2" />
+                        Atualizar
                       </button>
-                      <div>
-                        <h2 className="text-lg font-medium text-gray-900">
-                          {selectedProgram.name}
-                        </h2>
-                        <p className="text-sm text-gray-500">
-                          Programa: {selectedProgram.programPath}
-                        </p>
-                      </div>
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                        <h3 className="text-sm font-medium text-gray-900 mb-2">
-                          Informações do Programa
-                        </h3>
-                        <dl className="grid grid-cols-2 gap-2 text-sm">
-                          <dt className="text-gray-500">Máquina:</dt>
-                          <dd className="text-gray-900">
-                            {selectedProgram.machine}
-                          </dd>
-                          <dt className="text-gray-500">Material:</dt>
-                          <dd className="text-gray-900">
-                            {selectedProgram.material}
-                          </dd>
-                          <dt className="text-gray-500">Data:</dt>
-                          <dd className="text-gray-900">{selectedProgram.date}</dd>
-                          <dt className="text-gray-500">Programador:</dt>
-                          <dd className="text-gray-900">
-                            {selectedProgram.programmer}
-                          </dd>
-                          <dt className="text-gray-500">Centro do Bloco:</dt>
-                          <dd className="text-gray-900">
-                            {selectedProgram.blockCenter}
-                          </dd>
-                          <dt className="text-gray-500">Referência:</dt>
-                          <dd className="text-gray-900">
-                            {selectedProgram.reference}
-                          </dd>
-                        </dl>
-                      </div>
-
-                      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
-                        <div className="flex">
-                          <div className="flex-shrink-0">
-                            <Info className="h-5 w-5 text-yellow-400" />
-                          </div>
-                          <div className="ml-3">
-                            <h3 className="text-sm font-medium text-yellow-800">
-                              Observações
-                            </h3>
-                            <p className="text-sm text-yellow-700 mt-1">
-                              {selectedProgram.observations}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-gray-900 mb-2">
-                        Visualização do Programa
-                      </h3>
-                      <div className="aspect-w-16 aspect-h-9">
-                        <img
-                          src={selectedProgram.imageUrl}
-                          alt="Visualização do programa"
-                          className="w-full h-full object-contain rounded-lg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-8">
-                    <h3 className="text-lg font-medium text-gray-900 mb-4">
-                      Lista de Operações
-                    </h3>
-                    <div className="overflow-x-auto">
-                      <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
-                          <tr>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Seq.
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Tipo
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Função
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Ferramenta
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Parâmetros
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Qualidade
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Operador
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Horário
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Medição
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Status
-                            </th>
-                            <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Ações
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                          {selectedProgram.operations.map((operation) => (
-                            <tr
-                              key={operation.id}
-                              className={operation.completed ? 'bg-green-50' : ''}
-                            >
-                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
-                                {operation.sequence}
-                              </td>
-                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
-                                {operation.type}
-                              </td>
-                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
-                                {operation.function}
-                              </td>
-                              <td className="px-3 py-2 text-sm text-gray-500">
-                                <div className="max-w-xs truncate">
-                                  {operation.toolRef}
-                                </div>
-                              </td>
-                              <td className="px-3 py-2 text-sm text-gray-900">
-                                <div className="space-y-1">
-                                  <div>
-                                    Vel: {operation.details.speed}
-                                  </div>
-                                  <div>
-                                    Av: {operation.details.feed}
-                                  </div>
-                                  <div>
-                                    Prof: {operation.details.depth}
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="px-3 py-2 text-sm text-gray-900">
-                                <div>Tol: {operation.quality.tolerance}</div>
-                                <div>Acab: {operation.quality.surfaceFinish}</div>
-                              </td>
-                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
-                                {operation.completed ? operation.signedBy : '-'}
-                              </td>
-                              <td className="px-3 py-2 text-sm text-gray-900">
-                                {operation.completed ? (
-                                  <div className="space-y-1">
-                                    <div>Início: {operation.timeRecord?.start}</div>
-                                    <div>Fim: {operation.timeRecord?.end}</div>
-                                  </div>
-                                ) : (
-                                  '-'
-                                )}
-                              </td>
-                              <td className="px-3 py-2 text-sm text-gray-900">
-                                {operation.completed ? `${operation.measurementValue}mm` : '-'}
-                              </td>
-                              <td className="px-3 py-2 whitespace-nowrap text-sm">
-                                {operation.completed ? (
-                                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    <CheckCircle2 className="h-4 w-4 mr-1" />
-                                    Concluído
-                                  </span>
-                                ) : (
-                                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                    <AlertTriangle className="h-4 w-4 mr-1" />
-                                    Pendente
-                                  </span>
-                                )}
-                              </td>
-                              <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
-                                <OperationActions
-                                  operationId={operation.id}
-                                  completed={operation.completed}
-                                  onView={(e) => {
-                                    handleOperationClick(operation);
-                                  }}
-                                  onSign={(e) => {
-                                    handleOperationCheck(operation.id);
-                                  }}
-                                />
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {selectedOperation && (
-              <div className="bg-white shadow rounded-lg">
-                <div className="px-4 py-5 sm:p-6">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center space-x-4">
-                      <button
-                        onClick={() => setSelectedOperation(null)}
-                        className="text-gray-500 hover:text-gray-700"
-                      >
-                        <ArrowLeft className="h-6 w-6" />
-                      </button>
-                      <div>
-                        <h2 className="text-lg font-medium text-gray-900">
-                          Operação {selectedOperation.sequence} - {selectedOperation.type}
-                        </h2>
-                        <p className="text-sm text-gray-500">
-                          {selectedOperation.function}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {/* Mostrando apenas o status, removido o botão de assinar */}
-                    <div className="flex items-center">
-                      {selectedOperation.completed && (
-                        <div className="flex items-center">
-                          <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
-                          <span className="text-sm font-medium text-green-700">Concluída</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-6">
-                      {/* Status de Execução */}
-                      {selectedOperation.completed && (
-                        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                          <h3 className="text-sm font-medium text-gray-900 mb-4">
-                            Status de Execução
-                          </h3>
-                          <dl className="grid grid-cols-2 gap-2 text-sm">
-                            <dt className="text-gray-500">Assinado por:</dt>
-                            <dd className="text-gray-900">{selectedOperation.signedBy}</dd>
-                            <dt className="text-gray-500">Hora Início:</dt>
-                            <dd className="text-gray-900">{selectedOperation.timeRecord?.start}</dd>
-                            <dt className="text-gray-500">Hora Fim:</dt>
-                            <dd className="text-gray-900">{selectedOperation.timeRecord?.end}</dd>
-                            <dt className="text-gray-500">Medição:</dt>
-                            <dd className="text-gray-900">{selectedOperation.measurementValue}mm</dd>
-                            {selectedOperation.inspectionNotes && (
-                              <>
-                                <dt className="text-gray-500 col-span-2">Observações:</dt>
-                                <dd className="text-gray-900 col-span-2 italic">
-                                  "{selectedOperation.inspectionNotes}"
-                                </dd>
-                              </>
-                            )}
-                          </dl>
-                        </div>
-                      )}
-
-                      {/* Parâmetros de Usinagem */}
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <h3 className="text-sm font-medium text-gray-900 mb-4">
-                          Parâmetros de Usinagem
-                        </h3>
-                        <dl className="grid grid-cols-2 gap-2 text-sm">
-                          <dt className="text-gray-500">Velocidade:</dt>
-                          <dd className="text-gray-900">
-                            {selectedOperation.details.speed}
-                          </dd>
-                          <dt className="text-gray-500">Avanço:</dt>
-                          <dd className="text-gray-900">
-                            {selectedOperation.details.feed}
-                          </dd>
-                          <dt className="text-gray-500">Profundidade:</dt>
-                          <dd className="text-gray-900">
-                            {selectedOperation.details.depth}
-                          </dd>
-                          <dt className="text-gray-500">Refrigeração:</dt>
-                          <dd className="text-gray-900">
-                            {selectedOperation.details.coolant}
-                          </dd>
-                        </dl>
-                      </div>
-
-                      {/* Requisitos de Qualidade */}
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <h3 className="text-sm font-medium text-gray-900 mb-4">
-                          Requisitos de Qualidade
-                        </h3>
-                        <dl className="grid grid-cols-2 gap-2 text-sm mb-4">
-                          <dt className="text-gray-500">Tolerância:</dt>
-                          <dd className="text-gray-900">
-                            {selectedOperation.quality.tolerance}
-                          </dd>
-                          <dt className="text-gray-500">Acabamento:</dt>
-                          <dd className="text-gray-900">
-                            {selectedOperation.quality.surfaceFinish}
-                          </dd>
-                        </dl>
-                        <div>
-                          <h4 className="text-sm font-medium text-gray-900 mb-2">
-                            Checklist de Inspeção:
-                          </h4>
-                          <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
-                            {selectedOperation.quality.requirements.map((req, idx) => (
-                              <li key={idx}>{req}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-
-                      {/* Observações (se houver) */}
-                      {selectedOperation.details.notes && (
-                        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
-                          <div className="flex">
-                            <div className="flex-shrink-0">
-                              <Info className="h-5 w-5 text-yellow-400" />
+                    <div className="bg-white rounded-xl shadow-md">
+                      <div className="grid grid-cols-1 gap-4 p-6">
+                        {moldPrograms.map((program) => (
+                          <div
+                            key={program.id}
+                            onClick={() => setSelectedProgram(program)}
+                            className="border rounded-lg p-4 hover:border-[#04514B] transition-colors cursor-pointer"
+                          >
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <h3 className="font-semibold text-gray-900">
+                                  {program.name} - #{program.id}
+                                </h3>
+                                <p className="text-sm text-gray-500">Máquina: {program.machine}</p>
+                              </div>
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Em Andamento
+                              </span>
                             </div>
-                            <div className="ml-3">
-                              <h3 className="text-sm font-medium text-yellow-800">
-                                Observações
-                              </h3>
-                              <p className="text-sm text-yellow-700 mt-1">
-                                {selectedOperation.details.notes}
+                            <div className="mt-4">
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div
+                                  className="bg-[#04514B] h-2 rounded-full"
+                                  style={{
+                                    width: `${
+                                      (program.operations.filter((op) => op.completed)
+                                        .length /
+                                        program.operations.length) *
+                                      100
+                                    }%`,
+                                  }}
+                                ></div>
+                              </div>
+                              <p className="text-sm text-gray-500 mt-2">
+                                {
+                                  program.operations.filter((op) => op.completed).length
+                                }{' '}
+                                de {program.operations.length} operações concluídas
                               </p>
                             </div>
                           </div>
-                        </div>
-                      )}
+                        ))}
+                      </div>
                     </div>
+                  </div>
+                ) : !selectedOperation ? (
+                  // Visualização do Programa
+                  <div className="bg-white shadow rounded-lg">
+                    <div className="px-4 py-5 sm:p-6">
+                      <div className="flex justify-between items-center mb-6">
+                        <div className="flex items-center space-x-4">
+                          <button
+                            onClick={() => setSelectedProgram(null)}
+                            className="text-gray-500 hover:text-gray-700"
+                          >
+                            <ArrowLeft className="h-6 w-6" />
+                          </button>
+                          <div>
+                            <h2 className="text-lg font-medium text-gray-900">
+                              {selectedProgram.name}
+                            </h2>
+                            <p className="text-sm text-gray-500">
+                              Programa: {selectedProgram.programPath}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Conteúdo do programa */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Informações do programa */}
+                        <div>
+                          <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                            <h3 className="text-sm font-medium text-gray-900 mb-2">
+                              Informações do Programa
+                            </h3>
+                            <dl className="grid grid-cols-2 gap-2 text-sm">
+                              <dt className="text-gray-500">Máquina:</dt>
+                              <dd className="text-gray-900">
+                                {selectedProgram.machine}
+                              </dd>
+                              <dt className="text-gray-500">Material:</dt>
+                              <dd className="text-gray-900">
+                                {selectedProgram.material}
+                              </dd>
+                              <dt className="text-gray-500">Data:</dt>
+                              <dd className="text-gray-900">{selectedProgram.date}</dd>
+                              <dt className="text-gray-500">Programador:</dt>
+                              <dd className="text-gray-900">
+                                {selectedProgram.programmer}
+                              </dd>
+                              <dt className="text-gray-500">Centro do Bloco:</dt>
+                              <dd className="text-gray-900">
+                                {selectedProgram.blockCenter}
+                              </dd>
+                              <dt className="text-gray-500">Referência:</dt>
+                              <dd className="text-gray-900">
+                                {selectedProgram.reference}
+                              </dd>
+                            </dl>
+                          </div>
 
-                    {/* Visualização da Operação */}
-                    <div>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <h3 className="text-sm font-medium text-gray-900 mb-2">
-                          Visualização da Operação
-                        </h3>
-                        <div className="aspect-w-16 aspect-h-9">
-                          <img
-                            src={IMAGES.programCapa}
-                            alt="Visualização da operação"
-                            className="w-full h-full object-contain rounded-lg"
-                          />
+                          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
+                            <div className="flex">
+                              <div className="flex-shrink-0">
+                                <Info className="h-5 w-5 text-yellow-400" />
+                              </div>
+                              <div className="ml-3">
+                                <h3 className="text-sm font-medium text-yellow-800">
+                                  Observações
+                                </h3>
+                                <p className="text-sm text-yellow-700 mt-1">
+                                  {selectedProgram.observations}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Visualização do programa */}
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h3 className="text-sm font-medium text-gray-900 mb-2">
+                            Visualização do Programa
+                          </h3>
+                          <div className="aspect-w-16 aspect-h-9">
+                            <img
+                              src={selectedProgram.imageUrl}
+                              alt="Visualização do programa"
+                              className="w-full h-full object-contain rounded-lg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Tabela de operações */}
+                      <div className="mt-6">
+                        <div className="overflow-x-auto">
+                          <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                              <tr>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Seq.
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Tipo
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Função
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Ferramenta
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Parâmetros
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Qualidade
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Operador
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Horário
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Medição
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Status
+                                </th>
+                                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                  Ações
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                              {selectedProgram.operations.map((operation) => (
+                                <tr
+                                  key={operation.id}
+                                  className={operation.completed ? 'bg-green-50' : ''}
+                                >
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
+                                    {operation.sequence}
+                                  </td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
+                                    {operation.type}
+                                  </td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
+                                    {operation.function}
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-500">
+                                    <div className="max-w-xs truncate">
+                                      {operation.toolRef}
+                                    </div>
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">
+                                    <div className="space-y-1">
+                                      <div>
+                                        Vel: {operation.details.speed}
+                                      </div>
+                                      <div>
+                                        Av: {operation.details.feed}
+                                      </div>
+                                      <div>
+                                        Prof: {operation.details.depth}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">
+                                    <div>Tol: {operation.quality.tolerance}</div>
+                                    <div>Acab: {operation.quality.surfaceFinish}</div>
+                                  </td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-900">
+                                    {operation.completed ? operation.signedBy : '-'}
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">
+                                    {operation.completed ? (
+                                      <div className="space-y-1">
+                                        <div>Início: {operation.timeRecord?.start}</div>
+                                        <div>Fim: {operation.timeRecord?.end}</div>
+                                      </div>
+                                    ) : (
+                                      '-'
+                                    )}
+                                  </td>
+                                  <td className="px-3 py-2 text-sm text-gray-900">
+                                    {operation.completed ? `${operation.measurementValue}mm` : '-'}
+                                  </td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm">
+                                    {operation.completed ? (
+                                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        <CheckCircle2 className="h-4 w-4 mr-1" />
+                                        Concluído
+                                      </span>
+                                    ) : (
+                                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        <AlertTriangle className="h-4 w-4 mr-1" />
+                                        Pendente
+                                      </span>
+                                    )}
+                                  </td>
+                                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                                    <OperationActions
+                                      operationId={operation.id}
+                                      completed={operation.completed}
+                                      onView={(e) => {
+                                        handleOperationClick(operation);
+                                      }}
+                                      onSign={(e) => {
+                                        handleOperationCheck(operation.id);
+                                      }}
+                                    />
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  // Visualização da Operação
+                  <div className="bg-white shadow rounded-lg">
+                    <div className="px-4 py-5 sm:p-6">
+                      <div className="flex justify-between items-center mb-6">
+                        <div className="flex items-center space-x-4">
+                          <button
+                            onClick={() => setSelectedOperation(null)}
+                            className="text-gray-500 hover:text-gray-700"
+                          >
+                            <ArrowLeft className="h-6 w-6" />
+                          </button>
+                          <div>
+                            <h2 className="text-lg font-medium text-gray-900">
+                              Operação {selectedOperation.sequence} - {selectedOperation.type}
+                            </h2>
+                            <p className="text-sm text-gray-500">
+                              {selectedOperation.function}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {/* Mostrando apenas o status, removido o botão de assinar */}
+                        <div className="flex items-center">
+                          {selectedOperation.completed && (
+                            <div className="flex items-center">
+                              <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+                              <span className="text-sm font-medium text-green-700">Concluída</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-6">
+                          {/* Status de Execução */}
+                          {selectedOperation.completed && (
+                            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                              <h3 className="text-sm font-medium text-gray-900 mb-4">
+                                Status de Execução
+                              </h3>
+                              <dl className="grid grid-cols-2 gap-2 text-sm">
+                                <dt className="text-gray-500">Assinado por:</dt>
+                                <dd className="text-gray-900">{selectedOperation.signedBy}</dd>
+                                <dt className="text-gray-500">Hora Início:</dt>
+                                <dd className="text-gray-900">{selectedOperation.timeRecord?.start}</dd>
+                                <dt className="text-gray-500">Hora Fim:</dt>
+                                <dd className="text-gray-900">{selectedOperation.timeRecord?.end}</dd>
+                                <dt className="text-gray-500">Medição:</dt>
+                                <dd className="text-gray-900">{selectedOperation.measurementValue}mm</dd>
+                                {selectedOperation.inspectionNotes && (
+                                  <>
+                                    <dt className="text-gray-500 col-span-2">Observações:</dt>
+                                    <dd className="text-gray-900 col-span-2 italic">
+                                      "{selectedOperation.inspectionNotes}"
+                                    </dd>
+                                  </>
+                                )}
+                              </dl>
+                            </div>
+                          )}
+
+                          {/* Parâmetros de Usinagem */}
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <h3 className="text-sm font-medium text-gray-900 mb-4">
+                              Parâmetros de Usinagem
+                            </h3>
+                            <dl className="grid grid-cols-2 gap-2 text-sm">
+                              <dt className="text-gray-500">Velocidade:</dt>
+                              <dd className="text-gray-900">
+                                {selectedOperation.details.speed}
+                              </dd>
+                              <dt className="text-gray-500">Avanço:</dt>
+                              <dd className="text-gray-900">
+                                {selectedOperation.details.feed}
+                              </dd>
+                              <dt className="text-gray-500">Profundidade:</dt>
+                              <dd className="text-gray-900">
+                                {selectedOperation.details.depth}
+                              </dd>
+                              <dt className="text-gray-500">Refrigeração:</dt>
+                              <dd className="text-gray-900">
+                                {selectedOperation.details.coolant}
+                              </dd>
+                            </dl>
+                          </div>
+
+                          {/* Requisitos de Qualidade */}
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <h3 className="text-sm font-medium text-gray-900 mb-4">
+                              Requisitos de Qualidade
+                            </h3>
+                            <dl className="grid grid-cols-2 gap-2 text-sm mb-4">
+                              <dt className="text-gray-500">Tolerância:</dt>
+                              <dd className="text-gray-900">
+                                {selectedOperation.quality.tolerance}
+                              </dd>
+                              <dt className="text-gray-500">Acabamento:</dt>
+                              <dd className="text-gray-900">
+                                {selectedOperation.quality.surfaceFinish}
+                              </dd>
+                            </dl>
+                            <div>
+                              <h4 className="text-sm font-medium text-gray-900 mb-2">
+                                Checklist de Inspeção:
+                              </h4>
+                              <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                {selectedOperation.quality.requirements.map((req, idx) => (
+                                  <li key={idx}>{req}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Observações (se houver) */}
+                          {selectedOperation.details.notes && (
+                            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
+                              <div className="flex">
+                                <div className="flex-shrink-0">
+                                  <Info className="h-5 w-5 text-yellow-400" />
+                                </div>
+                                <div className="ml-3">
+                                  <h3 className="text-sm font-medium text-yellow-800">
+                                    Observações
+                                  </h3>
+                                  <p className="text-sm text-yellow-700 mt-1">
+                                    {selectedOperation.details.notes}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Visualização da Operação */}
+                        <div>
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <h3 className="text-sm font-medium text-gray-900 mb-2">
+                              Visualização da Operação
+                            </h3>
+                            <div className="aspect-w-16 aspect-h-9">
+                              <img
+                                src={IMAGES.programCapa}
+                                alt="Visualização da operação"
+                                className="w-full h-full object-contain rounded-lg"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
