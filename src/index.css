@@ -22,6 +22,14 @@ body {
   width: 100%;
 }
 
+/* Adicione estas regras para garantir que não haja espaçamento */
+.login-background img {
+  display: block;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
 .login-overlay {
   background: rgba(4, 57, 52, 0.85);
 }
@@ -103,3 +111,4 @@ body {
     gap: 1rem;
   }
 }
+

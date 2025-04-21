@@ -14,7 +14,9 @@ import {
   PenTool as Tool, 
   AlertTriangle, 
   Eye,
-  RefreshCw
+  RefreshCw,
+  LogIn,
+  Lock
 } from 'lucide-react';
 import { SignOperationModal } from './components/SignOperationModal';
 import { OperationActions } from './components/OperationActions';
@@ -341,6 +343,7 @@ function App() {
     isOpen: false,
     operationId: null as number | null,
   });
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleOperationClick = (operation: Operation) => {
     setSelectedOperation(operation);
@@ -615,62 +618,103 @@ function App() {
     setSignModal({ isOpen: false, operationId: null });
   };
 
+  const handleRefresh = (tab: string) => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000); // A animação dura 1 segundo
+  };
+
+  const refreshIconClass = `h-4 w-4 transition-transform duration-1000 ${
+    isRefreshing ? 'animate-spin' : ''
+  }`;
+
   if (!isAuthenticated) {
     return (
       <div className="login-background">
         <div className="min-h-screen flex items-center justify-center p-4">
-          <div className="bg-white p-0 max-w-5xl w-full flex flex-col md:flex-row overflow-hidden">
+          <div className="bg-white p-0 max-w-5xl w-full flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl">
             {/* Left side - Login form */}
-            <div className="w-full md:w-1/2 login-overlay p-6 md:p-12">
-              <div className="mb-8 md:mb-12">
-                <h1 className="text-3xl md:text-4xl font-bold text-white">Sistema De Projetos</h1>
+            <div className="w-full md:w-1/2 login-overlay p-6 md:p-12 flex flex-col justify-center">
+              <div className="mb-8">
+                <img
+                  src={IMAGES.logo}
+                  alt="Simoldes Logo"
+                  className="h-12 mb-6"
+                />
+                <h1 className="text-3xl font-bold text-white mb-2">Bem-vindo</h1>
+                <p className="text-gray-200 text-sm">
+                  Sistema de Controle de Projetos
+                </p>
               </div>
-              <form onSubmit={handleLogin} className="space-y-4 md:space-y-6">
+
+              <form onSubmit={handleLogin} className="space-y-6">
                 <div>
-                  <input
-                    type="text"
-                    id="operatorId"
-                    value={operatorId}
-                    onChange={(e) => setOperatorId(e.target.value)}
-                    className="w-full px-4 py-3 rounded-full border-0 focus:ring-2 focus:ring-[#04514B] bg-white"
-                    placeholder="Username"
-                    required
-                  />
+                  <label htmlFor="operatorId" className="block text-sm font-medium text-white mb-2">
+                    Número do Operador
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      id="operatorId"
+                      value={operatorId}
+                      onChange={(e) => setOperatorId(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border-0 focus:ring-2 focus:ring-[#04514B] bg-white text-lg"
+                      placeholder="Digite seu número"
+                      required
+                    />
+                  </div>
                 </div>
+
                 <div>
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-full border-0 focus:ring-2 focus:ring-[#04514B] bg-white"
-                    placeholder="••••••••"
-                    required
-                  />
+                  <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
+                    Senha
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border-0 focus:ring-2 focus:ring-[#04514B] bg-white text-lg"
+                      placeholder="••••••"
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center justify-between text-white text-sm">
+
+                <div className="flex items-center justify-between text-sm">
                   <label className="flex items-center">
                     <input 
                       type="checkbox" 
-                      className="rounded border-white mr-2 focus:ring-[#04514B] focus:ring-offset-0"
+                      className="rounded border-white mr-2 focus:ring-[#04514B] focus:ring-offset-0 text-[#04514B]"
                     />
-                    Lembrar-se
+                    <span className="text-white">Lembrar-me</span>
                   </label>
-                  <a href="#" className="hover:underline">Esqueci minha senha</a>
+                  <button 
+                    type="button"
+                    onClick={() => alert('Por favor, contate o suporte técnico.')}
+                    className="text-white hover:underline"
+                  >
+                    Esqueci a senha
+                  </button>
                 </div>
+
                 <button
                   type="submit"
-                  className="w-full py-3 px-4 bg-white text-[#04514B] rounded-full font-medium hover:bg-gray-100 transition-colors"
+                  className="w-full py-3 px-4 bg-white text-[#04514B] rounded-xl font-medium hover:bg-gray-100 transition-colors text-lg flex items-center justify-center gap-2"
                 >
-                  Entrar
+                  <LogIn className="h-5 w-5" />
+                  Entrar no Sistema
                 </button>
               </form>
             </div>
             
-            {/* Right side - Illustration */}
-            <div className="w-full md:w-1/2 bg-white p-0">
+            {/* Right side - Image */}
+            <div className="hidden md:block w-1/2">
               <img
-
                 src={IMAGES.loginCapa}
                 alt="Login illustration"
                 className="w-full h-full object-cover"
@@ -802,84 +846,124 @@ function App() {
 
           <main className="flex-1 p-4 md:p-8">
             {activeTab === 'dashboard' && !selectedProgram && (
-              <div className="space-y-4 md:space-y-6">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900">Dashboard</h2>
-                
-                {/* Stats Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                  <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                      Projetos Ativos
-                    </h3>
-                    <div className="text-3xl font-bold text-[#04514B]">{moldPrograms.length}</div>
+              <div className="space-y-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">Dashboard</h2>
+                  <div className="flex items-center gap-3">
+                    <button 
+                      onClick={() => handleRefresh('dashboard')} 
+                      className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 bg-white rounded-lg shadow-sm hover:shadow transition-all"
+                    >
+                      <RefreshCw className={refreshIconClass} />
+                      <span>Atualizar</span>
+                    </button>
                   </div>
-                  <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                      Em Andamento
-                    </h3>
-                    <div className="text-3xl font-bold text-[#04514B]">
-                      {moldPrograms.filter(p => p.operations.some(op => !op.completed)).length}
+                </div>
+
+                {/* Stats Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-500 text-sm font-medium">Projetos Ativos</span>
+                      <span className="bg-green-100 p-2 rounded-lg">
+                        <ClipboardList className="h-5 w-5 text-green-600" />
+                      </span>
+                    </div>
+                    <div className="flex items-baseline">
+                      <span className="text-3xl font-bold text-[#04514B]">{moldPrograms.length}</span>
+                      <span className="ml-2 text-sm text-gray-500">projetos</span>
                     </div>
                   </div>
-                  <div className="bg-white p-6 rounded-xl shadow-md">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                      Concluídos Hoje
-                    </h3>
-                    <div className="text-3xl font-bold text-[#04514B]">
-                      {moldPrograms.filter(p => p.operations.every(op => op.completed)).length}
+
+                  <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-500 text-sm font-medium">Em Andamento</span>
+                      <span className="bg-blue-100 p-2 rounded-lg">
+                        <Tool className="h-5 w-5 text-blue-600" />
+                      </span>
+                    </div>
+                    <div className="flex items-baseline">
+                      <span className="text-3xl font-bold text-[#04514B]">
+                        {moldPrograms.filter(p => p.operations.some(op => !op.completed)).length}
+                      </span>
+                      <span className="ml-2 text-sm text-gray-500">em execução</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-500 text-sm font-medium">Concluídos Hoje</span>
+                      <span className="bg-purple-100 p-2 rounded-lg">
+                        <CheckCircle2 className="h-5 w-5 text-purple-600" />
+                      </span>
+                    </div>
+                    <div className="flex items-baseline">
+                      <span className="text-3xl font-bold text-[#04514B]">
+                        {moldPrograms.filter(p => p.operations.every(op => op.completed)).length}
+                      </span>
+                      <span className="ml-2 text-sm text-gray-500">finalizados</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Recent Projects Section */}
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Projetos Recentes
-                  </h3>
-                  <div className="space-y-4">
-                    {moldPrograms.map((program) => (
-                      <div
-                        key={program.id}
-                        onClick={() => {
-                          setActiveTab('projects');
-                          setSelectedProgram(program);
-                        }}
-                        className="flex items-center justify-between py-3 border-b last:border-0 hover:bg-gray-50 cursor-pointer rounded-lg px-3 transition-colors"
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="bg-white p-6 rounded-xl shadow-sm">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-lg font-semibold text-gray-900">Projetos Recentes</h3>
+                      <button 
+                        onClick={() => setActiveTab('projects')}
+                        className="text-sm text-[#04514B] hover:text-[#033630] font-medium"
                       >
-                        <div className="flex items-center space-x-3">
-                          <div className="bg-[#04514B] bg-opacity-10 p-2 rounded-lg">
-                            <ClipboardList className="h-5 w-5 text-[#04514B]" />
+                        Ver todos
+                      </button>
+                    </div>
+                    <div className="space-y-4">
+                      {moldPrograms.slice(0, 4).map((program) => (
+                        <div
+                          key={program.id}
+                          onClick={() => {
+                            setActiveTab('projects');
+                            setSelectedProgram(program);
+                          }}
+                          className="flex items-center p-4 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors"
+                        >
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3">
+                              <Factory className="h-5 w-5 text-gray-400" />
+                              <span className="font-medium text-gray-900">{program.name}</span>
+                            </div>
+                            <div className="mt-1 flex items-center gap-4 text-sm text-gray-500">
+                              <span>Máquina: {program.machine}</span>
+                              <span>•</span>
+                              <span>{program.date}</span>
+                            </div>
                           </div>
-                          <div>
-                            <p className="font-medium text-gray-900">
-                              {program.name} - #{program.id}
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              Máquina: {program.machine}
-                            </p>
-                          </div>
+                          <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
+                            program.operations.every(op => op.completed)
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {program.operations.every(op => op.completed) 
+                              ? <><CheckCircle2 className="h-3 w-3 mr-1" />Concluído</>
+                              : `${program.operations.filter(op => !op.completed).length} pendentes`}
+                          </span>
                         </div>
-                        <span className="text-sm text-gray-500">
-                          {program.date}
-                        </span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* Power BI Dashboard */}
-                <div className="bg-white p-4 md:p-6 rounded-xl shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Análise em Tempo Real
-                  </h3>
-                  {/* Container do iframe com altura fixa */}
-                  <div className="w-full powerbi-container"> {/* Adicionada classe powerbi-container */}
-                    <iframe 
-                      title="Dashboard Simoldes"
-                      src="https://app.powerbi.com/view?r=eyJrIjoiMzdlYmM0NDctMzdjNi00YmZkLWE0NTQtMjc3MDg3OGYzNmMzIiwidCI6ImU5YzgwMThiLTQwY2YtNDE5MC1hOTA3LTI1ZjNjZjMyNzdiMiJ9"
-                      className="w-full h-full border-0 rounded-lg"
-                      allowFullScreen
-                    />
+                  {/* Power BI Dashboard */}
+                  <div className="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-6">Análise em Tempo Real</h3>
+                    <div className="powerbi-container rounded-lg overflow-hidden">
+                      <iframe 
+                        title="Dashboard Simoldes"
+                        src="https://app.powerbi.com/view?r=eyJrIjoiMzdlYmM0NDctMzdjNi00YmZkLWE0NTQtMjc3MDg3OGYzNmMzIiwidCI6ImU5YzgwMThiLTQwY2YtNDE5MC1hOTA3LTI1ZjNjZjMyNzdiMiJ9"
+                        className="w-full h-full border-0"
+                        allowFullScreen
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -888,69 +972,84 @@ function App() {
             {activeTab === 'projects' && (
               <div>
                 {!selectedProgram ? (
-                  // Lista de Projetos
-                  <div>
+                  <div className="p-6">
                     <div className="flex justify-between items-center mb-6">
-                      <h2 className="text-2xl font-bold text-gray-900">Projetos</h2>
-                      <button
-                        onClick={() => {
-                          const button = document.querySelector('#refresh-button');
-                          if (button) {
-                            button.classList.add('animate-spin');
-                            setTimeout(() => {
-                              button.classList.remove('animate-spin');
-                            }, 1000);
-                          }
-                        }}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#04514B] hover:bg-[#023834] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#04514B] transition-colors"
-                      >
-                        <RefreshCw id="refresh-button" className="h-4 w-4 mr-2" />
-                        Atualizar
-                      </button>
+                      <h2 className="text-2xl font-bold text-gray-900">
+                        Projetos
+                      </h2>
+                      <div className="flex items-center gap-3">
+                        <button 
+                          onClick={() => handleRefresh('projects')} 
+                          className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 bg-white rounded-lg shadow-sm hover:shadow transition-all"
+                        >
+                          <RefreshCw className={refreshIconClass} />
+                          <span>Atualizar</span>
+                        </button>
+                      </div>
                     </div>
-                    <div className="bg-white rounded-xl shadow-md">
-                      <div className="grid grid-cols-1 gap-4 p-6">
-                        {moldPrograms.map((program) => (
-                          <div
-                            key={program.id}
-                            onClick={() => setSelectedProgram(program)}
-                            className="border rounded-lg p-4 hover:border-[#04514B] transition-colors cursor-pointer"
-                          >
-                            <div className="flex justify-between items-start">
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {moldPrograms.map((program) => (
+                        <div
+                          key={program.id}
+                          onClick={() => {
+                            setSelectedOperation(null);
+                            setSelectedProgram(program);
+                          }}
+                          className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer border border-transparent hover:border-[#04514B]"
+                        >
+                          <div className="p-6">
+                            <div className="flex justify-between items-start mb-4">
                               <div>
-                                <h3 className="font-semibold text-gray-900">
-                                  {program.name} - #{program.id}
+                                <h3 className="text-lg font-semibold text-gray-900">
+                                  {program.name}
                                 </h3>
-                                <p className="text-sm text-gray-500">Máquina: {program.machine}</p>
+                                <p className="text-sm text-gray-500 mt-1">
+                                  <Factory className="h-4 w-4 inline mr-1" />
+                                  Máquina: {program.machine}
+                                </p>
                               </div>
-                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Em Andamento
+                              <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
+                                program.operations.every(op => op.completed)
+                                  ? 'bg-green-100 text-green-800'
+                                  : 'bg-yellow-100 text-yellow-800'
+                              }`}>
+                                {program.operations.every(op => op.completed) 
+                                  ? <><CheckCircle2 className="h-3 w-3 mr-1" />Concluído</>
+                                  : `${program.operations.filter(op => !op.completed).length} etapas pendentes`}
                               </span>
                             </div>
-                            <div className="mt-4">
-                              <div className="w-full bg-gray-200 rounded-full h-2">
-                                <div
-                                  className="bg-[#04514B] h-2 rounded-full"
-                                  style={{
-                                    width: `${
-                                      (program.operations.filter((op) => op.completed)
-                                        .length /
-                                        program.operations.length) *
-                                      100
-                                    }%`,
-                                  }}
-                                ></div>
+
+                            <div className="space-y-3">
+                              <div className="flex items-center text-sm">
+                                <Tool className="h-4 w-4 text-gray-400 mr-2" />
+                                <span className="text-gray-600">Material: {program.material}</span>
                               </div>
-                              <p className="text-sm text-gray-500 mt-2">
-                                {
-                                  program.operations.filter((op) => op.completed).length
-                                }{' '}
-                                de {program.operations.length} operações concluídas
-                              </p>
+                              <div className="flex items-center text-sm">
+                                <User className="h-4 w-4 text-gray-400 mr-2" />
+                                <span className="text-gray-600">{program.programmer}</span>
+                              </div>
+                              <div className="flex items-center text-sm">
+                                <History className="h-4 w-4 text-gray-400 mr-2" />
+                                <span className="text-gray-600">Data: {program.date}</span>
+                              </div>
+                            </div>
+
+                            <div className="mt-4 text-right">
+                              <button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedOperation(null);
+                                  setSelectedProgram(program);
+                                }}
+                                className="text-sm text-blue-600 hover:text-blue-800"
+                              >
+                                Ver detalhes →
+                              </button>
                             </div>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ) : !selectedOperation ? (
@@ -974,6 +1073,15 @@ function App() {
                             </p>
                           </div>
                         </div>
+                        
+                        {/* Botão de atualizar */}
+                        <button 
+                          onClick={() => handleRefresh('projects')}
+                          className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 bg-white rounded-lg shadow-sm hover:shadow transition-all"
+                        >
+                          <RefreshCw className={refreshIconClass} />
+                          <span>Atualizar</span>
+                        </button>
                       </div>
                       
                       {/* Conteúdo do programa */}
