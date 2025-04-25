@@ -26,8 +26,7 @@ const IMAGES = {
   loginCapa: `${import.meta.env.BASE_URL}Capa Simoldes.png`,
   programCapa: `${import.meta.env.BASE_URL}2d.jpg`,
   operation: `${import.meta.env.BASE_URL}operation.png`,
-  operation2d: `${import.meta.env.BASE_URL}2d.jpg`,  // Adicionando nova referência
-  
+  operation2d: `${import.meta.env.BASE_URL}2d.jpg`,
 };
 
 interface Operation {
